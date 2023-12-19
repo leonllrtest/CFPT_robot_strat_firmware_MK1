@@ -1,11 +1,14 @@
 #include <Arduino.h>
 #include <HardwareSerial.h>
+#include "communication.h"
 
 HardwareSerial RobotSerial(1);
 
 void initCommunication()
 {
    RobotSerial.begin(115200, SERIAL_8N1, 20, 21);
+
+   delay(500);
 }
 
 void sendCommand(String cmd)
@@ -62,14 +65,17 @@ uint8_t getLineSensorReadingBlocking()
    emptySerialQueue(); // pour éviter des mauvais résultats
 
    sendCommand("CL");
+   delay(10);
 
    while(cmd_buf_pointer < 2)
    {
-      while(!RobotSerial.available());
+      while(RobotSerial.available() < 1);
+
+      Serial.println("Recieved char");
 
       cmd_buf[cmd_buf_pointer] = (char)RobotSerial.read();
       cmd_buf_pointer++;
    }
 
-   return (uint8_t)strtol(cmd_buf, 0, 2);
+   return (uint8_t)strtol(cmd_buf, (char**)NULL, 16);
 }
