@@ -71,7 +71,7 @@ uint8_t getLineSensorReadingBlocking()
    {
       while(RobotSerial.available() < 1);
 
-      Serial.println("Recieved char");
+      // Serial.println("Recieved char");
 
       cmd_buf[cmd_buf_pointer] = (char)RobotSerial.read();
       cmd_buf_pointer++;
