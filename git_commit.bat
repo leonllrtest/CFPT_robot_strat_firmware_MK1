@@ -7,7 +7,7 @@ git init
 git add . --all
 git commit -m "%commit_txt%"
 git branch -M main
-git remote add origin https://github.com/leonllrtest/CFPT_robot_strat_firmware_MK1.git
+git remote add origin https://github.com/leonllrtest/CFPT_robot_strat_firmware_MK1_PID.git
 git push -u origin main
 
 

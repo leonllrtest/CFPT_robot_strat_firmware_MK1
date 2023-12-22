@@ -65,7 +65,7 @@ uint8_t getLineSensorReadingBlocking()
    emptySerialQueue(); // pour éviter des mauvais résultats
 
    sendCommand("CL");
-   delay(10);
+   delay(5);
 
    while(cmd_buf_pointer < 2)
    {
