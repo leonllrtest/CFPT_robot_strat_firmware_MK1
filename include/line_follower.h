@@ -8,7 +8,7 @@ typedef unsigned char uint8_t;
 //const unsigned char ANGLE_COEFF_2 = 6; -> 30%
 //const unsigned char ANGLE_COEFF_3 = 10;
 
-const float ANGLE_COEFF_0 = 0.2;
+const float ANGLE_COEFF_0 = 0.1;
 const float ANGLE_COEFF_1 = 0.8;
 const float ANGLE_COEFF_2 = 2.5;
 const float ANGLE_COEFF_3 = 4;

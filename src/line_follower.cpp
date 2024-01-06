@@ -16,6 +16,8 @@ void lineFollowStartup()
    //SerialBT.begin("ESP32_LLR_robot"); //Bluetooth device name
 
    sendCommand("PW" + String(BASE_SPEED));
+
+   sendCommand("AC2");
    delay(200);
 
    uint8_t sensorReadingLine = getLineSensorReadingBlocking();
