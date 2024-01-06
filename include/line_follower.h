@@ -8,17 +8,22 @@ typedef unsigned char uint8_t;
 //const unsigned char ANGLE_COEFF_2 = 6; -> 30%
 //const unsigned char ANGLE_COEFF_3 = 10;
 
-const float ANGLE_COEFF_0 = 0.0;
-const float ANGLE_COEFF_1 = 0.05;
-const float ANGLE_COEFF_2 = 0.3;
-const float ANGLE_COEFF_3 = 0.5;
+const float ANGLE_COEFF_0 = 0.2;
+const float ANGLE_COEFF_1 = 0.8;
+const float ANGLE_COEFF_2 = 2.5;
+const float ANGLE_COEFF_3 = 4;
 
+const unsigned char RECOVERY_COEFF = 15;
+
+#define FILTER_THRESHOLD 8
 
 // NOTE: have each block be abs(most-less)-lesser
-const unsigned char SPEED_COEFF_0 = 70;
-const unsigned char SPEED_COEFF_1 = 50;
-const unsigned char SPEED_COEFF_2 = 35;
-const unsigned char SPEED_COEFF_3 = 15;
+const int SPEED_COEFF_0 = 25;
+const int SPEED_COEFF_1 = 20;
+const int SPEED_COEFF_2 = 15;
+const int SPEED_COEFF_3 = 10;
+
+const unsigned char RECOVERY_SPEED = 20;
 
 void lineFollowStartup();
 
