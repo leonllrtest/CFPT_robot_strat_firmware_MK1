@@ -29,12 +29,15 @@ void setup() {
    // put back when hardware implementation of jumber if ready
    //while(getIfJumperPresent()) delay(100); // enable only when jumper removed
 
+   sendCommand("AC2"); // set Acceleration to low
+
    lineFollowStartup();
 }
 
 void loop() {
    lineFollowerTick();
-
+  
    BLECommTick();
+	delay(2);
 }
 

@@ -17,6 +17,7 @@ void lineFollowStartup()
    sendCommand("PW" + String(BASE_SPEED));
 
    sendCommand("AC2");
+
    delay(200);
 
    uint8_t sensorReadingLine = getLineSensorReadingBlocking();
@@ -36,8 +37,8 @@ void lineFollowerTick()
 {
    uint8_t sensorReadingLine = getLineSensorReadingBlocking();
 
-   uint8_t lineLeft = (sensorReadingLine & 0xF0) >> 4;
-   uint8_t lineRight = reverseBits((sensorReadingLine & 0x0F));
+   uint8_t lineLeft = (sensorReadingLine & 0x0F);
+   uint8_t lineRight = reverseBits(((sensorReadingLine & 0xF0) >> 4));
 
 
 
@@ -46,6 +47,7 @@ void lineFollowerTick()
    
    if(lineLeft > lineRight) // select only the most used line
    {
+
 
       if((lineLeft - lastLeft) > FILTER_THRESHOLD)
       {
@@ -109,7 +111,9 @@ void lineFollowerTick()
       sendCommand("PG" + String(SPEED_COEFF_0));
    }
 
+
 }
+
 
 int getBaseSpeed(uint8_t lineUsed)
 {
@@ -137,10 +141,6 @@ int getBaseSpeed(uint8_t lineUsed)
 int getAngleCorrection(uint8_t baseSpeed, uint8_t lineUsed, char dir='L')
 {
 
-   uint8_t coeffBit0 = (lineUsed & 0x01) ? 1 : 0;
-   uint8_t coeffBit1 = ((lineUsed & 0x02) >> 1) ? 1 : 0;
-   uint8_t coeffBit2 = ((lineUsed & 0x04) >> 2) ? 1 : 0;
-   uint8_t coeffBit3 = ((lineUsed & 0x08) >> 3) ? 1 : 0;
 
    // should be inversed, if multiple line are triggered, the situation is less worst than
    // if only furthest if triggered

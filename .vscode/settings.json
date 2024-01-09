@@ -48,5 +48,7 @@
       "streambuf": "cpp",
       "cinttypes": "cpp",
       "typeinfo": "cpp"
+      "random": "cpp",
+      "limits": "cpp"
    }
 }
