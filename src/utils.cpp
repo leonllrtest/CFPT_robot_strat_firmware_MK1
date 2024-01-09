@@ -20,6 +20,18 @@ unsigned char reverseBits(unsigned char num) {
    return reversedNum;
 }
 
+unsigned char getBitNumber(unsigned char byteToCount)
+{
+   unsigned char bitNumber;
+
+   for(unsigned char i = 0; i < 7; i++)
+   {
+      bitNumber += ((byteToCount & (0x01 << i)) ? 1 : 0);
+   }
+
+   return bitNumber;
+}
+
 uint8_t countBits(uint8_t num) {
    uint8_t total = 0;
 

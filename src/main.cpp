@@ -5,6 +5,8 @@
 
 #include "enJumper.h"
 
+#include "BLESerial.h"
+
 #define LED_PIN 8
 
 
@@ -19,6 +21,9 @@ void setup() {
    initCommunication();
    emptySerialQueue();
 
+   BLECommInit();
+
+
    Serial.println("Begun USB serial port");
 
    // put back when hardware implementation of jumber if ready
@@ -30,9 +35,9 @@ void setup() {
 }
 
 void loop() {
-
    lineFollowerTick();
-
+  
+   BLECommTick();
 	delay(2);
 }
 
