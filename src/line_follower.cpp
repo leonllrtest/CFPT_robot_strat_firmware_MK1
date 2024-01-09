@@ -6,8 +6,7 @@
 
 #include <math.h>
 
-//#include "BluetoothSerial.h"
-//BluetoothSerial SerialBT;
+#include "BLESerial.h"
 
 uint8_t lastRight, lastLeft;
 
@@ -54,7 +53,7 @@ void lineFollowerTick()
       }
 
       uint8_t baseSpeed = getBaseSpeed(lineLeft);
-      uint8_t angleCorrection = getAngleCorrection(baseSpeed, lineLeft);
+      uint8_t angleCorrection = getAngleCorrection(baseSpeed, lineLeft,  'L');
 
       //SerialBT.println("Going left: " + String(angleCorrection));
 
@@ -72,7 +71,7 @@ void lineFollowerTick()
       }
 
       uint8_t baseSpeed = getBaseSpeed(lineRight);
-      uint8_t angleCorrection = getAngleCorrection(baseSpeed, lineRight);
+      uint8_t angleCorrection = getAngleCorrection(baseSpeed, lineRight, 'R');
 
       //SerialBT.println("Going right: " + String(angleCorrection));
 
@@ -123,7 +122,7 @@ int getBaseSpeed(uint8_t lineUsed)
 
    if(getBitNumber(lineUsed) == 0)
    {
-      Serial.print("Returning bnecause no sensor triggered");
+      Serial.print("Returning because no sensor triggered");
       return 0;
    }
 
@@ -135,7 +134,7 @@ int getBaseSpeed(uint8_t lineUsed)
    return baseSpeed;
 }
 
-int getAngleCorrection(uint8_t baseSpeed, uint8_t lineUsed)
+int getAngleCorrection(uint8_t baseSpeed, uint8_t lineUsed, char dir='L')
 {
 
    uint8_t coeffBit0 = (lineUsed & 0x01) ? 1 : 0;
@@ -153,8 +152,11 @@ int getAngleCorrection(uint8_t baseSpeed, uint8_t lineUsed)
 
    int angleCorrection = (((float)coeffBit0 * ANGLE_COEFF_0) + ((float)coeffBit1 * ANGLE_COEFF_1) + ((float)coeffBit2 * ANGLE_COEFF_2) + ((float)coeffBit3 * ANGLE_COEFF_3)) / (float)getBitNumber(lineUsed) * (float)baseSpeed;
 
-   Serial.printf("Returned angleCoeff: %i, for baseSpeed of: %i", angleCorrection, baseSpeed);
+   // Serial.printf("Returned angleCoeff: %i, for baseSpeed of: %i", angleCorrection, baseSpeed);
    Serial.println("Returned angleCoeff: " + String(angleCorrection) +", for baseSpeed of: " + String(baseSpeed));
+
+   sendBLEText("Returned angleCoeff: " + String(angleCorrection) +", for baseSpeed of: " + String(baseSpeed) + "With sensors being" + String(coeffBit0) + String(coeffBit1) + String(coeffBit2) + String(coeffBit3) + "and direction being" + String(dir) + "\n");
+
 
    return (((float)coeffBit0 * ANGLE_COEFF_0) + ((float)coeffBit1 * ANGLE_COEFF_1) + ((float)coeffBit2 * ANGLE_COEFF_2) + ((float)coeffBit3 * ANGLE_COEFF_3)) / (float)getBitNumber(lineUsed) * (float)baseSpeed;
 }

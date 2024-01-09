@@ -5,7 +5,7 @@
 
 #include "enJumper.h"
 
-
+#include "BLESerial.h"
 
 #define LED_PIN 8
 
@@ -21,6 +21,8 @@ void setup() {
    initCommunication();
    emptySerialQueue();
 
+   BLECommInit();
+
 
    Serial.println("Begun USB serial port");
 
@@ -31,7 +33,8 @@ void setup() {
 }
 
 void loop() {
-
    lineFollowerTick();
+
+   BLECommTick();
 }
 

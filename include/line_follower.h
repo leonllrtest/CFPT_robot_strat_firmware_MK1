@@ -30,4 +30,4 @@ void lineFollowStartup();
 void lineFollowerTick();
 
 int getBaseSpeed(uint8_t lineUsed);
-int getAngleCorrection(uint8_t baseSpeed, uint8_t lineUsed);
+int getAngleCorrection(uint8_t baseSpeed, uint8_t lineUsed, char dir);
